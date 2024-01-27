@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  binance_api:
+    container_name: binance_api
+    image: binance_api
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres_db
+      - redis_db
+
+  postgres_db:
+    container_name: postgres_db
+    hostname: postgres_db
+    image: library/postgres:14.1
+
+    environment:
+      - POSTGRES_USER=binance
+      - POSTGRES_PASSWORD=binance
+      - POSTGRES_DB=binance
+    volumes:
+      - app_pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis_db:
+    image: redis:6.2-alpine
+    hostname: redis_db
+    container_name: redis_db
+    command:
+      - 'redis-server'
+      - '--requirepass myStrongPassword'
+    ports:
+      - 6379:6379
+
+volumes:
+  app_pg_data:
+    driver: "local"
+
+networks:
+  default:
+    external: true
+    name: binance_api
