@@ -1,4 +1,5 @@
 # Binance api
+> Важное замечание: Сервис кеширует результаты запросов к binance api в хранилище Redis, время жизни записей конфигурируется в файле .env, по умолчанию 3 секунды. При этом PostgreSQL подключен к проекту для теоритического расширения функционала.
 ## Fast setup
 Предварительно нужно создать файл ```.env``` в корне проекта по шаблону .env.example
 
@@ -9,6 +10,7 @@ docker network create binance_api
 docker-compose up -d --build
 docker compose exec binance_api migrate
 ```
+
 ## Commands
 ### Migrations
 - Create an automatic migration from changes in `src/models.py`
@@ -41,7 +43,7 @@ docker exec -it redis sh
 ```
 
 ```shell
-redis-cli -h redis -p 6379 -a myStrongPassword
+redis-cli -h redis_db -p 6379 -a myStrongPassword
 ```
 ------
 ## Работа с запущенным сервером

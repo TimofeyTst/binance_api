@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: d37074498498
+Revision ID: 6ae503715a24
 Revises: 
-Create Date: 2024-01-27 12:03:57.768847
+Create Date: 2024-01-28 12:02:46.767752
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = "d37074498498"
+revision = "6ae503715a24"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,7 +22,7 @@ def upgrade() -> None:
         "currency_pair",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("symbol", sa.String(), nullable=False),
-        sa.Column("price", sa.Integer(), nullable=False),
+        sa.Column("price", sa.Numeric(), nullable=False),
         sa.Column("timestamp", sa.DateTime(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )

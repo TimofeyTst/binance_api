@@ -1,4 +1,6 @@
-from sqlalchemy import Column, DateTime, Integer, String
+from datetime import datetime
+
+from sqlalchemy import Column, DateTime, Integer, Numeric, String
 
 from src.database import Base
 
@@ -8,5 +10,5 @@ class CurrencyPair(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     symbol = Column(String, nullable=False)
-    price = Column(Integer, nullable=False)
-    timestamp = Column(DateTime)
+    price = Column(Numeric, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow)

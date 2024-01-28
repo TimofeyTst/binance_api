@@ -10,7 +10,7 @@ class CurrencyPairBase(BaseModel):
 
 
 class CurrencyPairCreate(CurrencyPairBase):
-    timestamp: datetime
+    pass
 
 
 class CurrencyPairRead(CurrencyPairBase):
